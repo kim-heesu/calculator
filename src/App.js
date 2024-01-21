@@ -25,6 +25,10 @@ const App = () => {
         setAmount(e.target.valueAsNumber)
     }
 
+    const initValue = ()=>{
+        setCharge("");
+        setAmount(0);
+    }
     const handleDelete = (id)=>{
         const newExpense = expenses.filter(expense=>expense.id !== id)
         setExpenses(newExpense)
@@ -65,6 +69,7 @@ const App = () => {
                 setExpenses(newExpenses);
                 setEdit(false);
                 handelAlert({type:'success',text:'아이템이 수정되었습니다.'});
+                initValue();
             } else {
                 const newExpense = {
                     id: crypto.randomUUID(), // 유니크한값을 계속 생성해주는 crypto.randomUUID()
@@ -73,8 +78,7 @@ const App = () => {
                 };
     
                 const newExpenses = [...expenses, newExpense];
-                setCharge("");
-                setAmount(0);
+                initValue();
                 setExpenses(newExpenses);
                 handelAlert({type:'success',text:'아이템이 생성되었습니다.'});
             }
